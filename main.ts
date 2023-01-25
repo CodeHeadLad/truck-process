@@ -1,34 +1,39 @@
-radio.onReceivedNumber(function (receivedNumber) {
-    if (receivedNumber == 1) {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 85)
+radio.onReceivedString(function (receivedString) {
+    if (receivedString == "forward") {
         Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Forward, 46)
-        basic.showLeds(`
-            . . # . .
-            . # # # .
-            . . # . .
-            . . # . .
-            . . # . .
-            `)
+        basic.showArrow(ArrowNames.North)
     }
-    if (receivedNumber == 2) {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Reverse, 85)
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Reverse, 46)
+    if (receivedString == "reverse") {
+        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Forward, 46)
+        basic.showArrow(ArrowNames.South)
+    }
+    if (receivedString == "right") {
+        Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 135)
+        basic.showArrow(ArrowNames.East)
+    }
+    if (receivedString == "left") {
         Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 45)
-        basic.showIcon(IconNames.Sword)
+        basic.showArrow(ArrowNames.West)
     }
-})
-input.onButtonPressed(Button.A, function () {
-	
 })
 input.onButtonPressed(Button.B, function () {
     Kitronik_Robotics_Board.allOff()
 })
+// https://makecode.microbit.org/projects/soil-moisture/code
+let reading = 0
 radio.setGroup(1)
 Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 0)
-basic.showIcon(IconNames.Square)
+basic.showIcon(IconNames.Yes)
 basic.forever(function () {
-    radio.raiseEvent(
-    EventBusSource.MICROBIT_ID_BUTTON_A,
-    EventBusValue.MICROBIT_EVT_ANY
+    pins.analogWritePin(AnalogPin.P1, 1023)
+    reading = pins.analogReadPin(AnalogPin.P0)
+    pins.analogWritePin(AnalogPin.P1, 0)
+    led.plotBarGraph(
+    reading,
+    1023
     )
+    if (input.buttonIsPressed(Button.A)) {
+        basic.showNumber(reading)
+    }
+    basic.pause(5000)
 })
