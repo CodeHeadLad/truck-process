@@ -33,6 +33,8 @@ basic.forever(function () {
     }
     if (reading < 500) {
         Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 46)
+    } else {
+        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
     }
     basic.pause(5000)
 })
