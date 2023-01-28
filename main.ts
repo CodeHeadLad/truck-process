@@ -15,6 +15,10 @@ radio.onReceivedString(function (receivedString) {
         Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 45)
         basic.showArrow(ArrowNames.West)
     }
+    if (receivedString == "centetered") {
+        Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 0)
+        basic.showArrow(ArrowNames.North)
+    }
 })
 input.onButtonPressed(Button.B, function () {
     Kitronik_Robotics_Board.allOff()
