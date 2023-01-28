@@ -16,7 +16,7 @@ radio.onReceivedString(function (receivedString) {
         basic.showArrow(ArrowNames.West)
     }
     if (receivedString == "centetered") {
-        Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 0)
+        Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 90)
         basic.showArrow(ArrowNames.North)
     }
 })
