@@ -1,10 +1,10 @@
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "forward") {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Forward, 46)
+        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Forward, 30)
         basic.showArrow(ArrowNames.North)
     }
     if (receivedString == "reverse") {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Reverse, 46)
+        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Reverse, 30)
         basic.showArrow(ArrowNames.South)
     }
     if (receivedString == "right") {
@@ -43,7 +43,7 @@ basic.forever(function () {
         basic.showNumber(reading)
     }
     if (reading < 500) {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 46)
+        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 30)
         basic.showIcon(IconNames.SmallSquare)
     } else {
         Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
