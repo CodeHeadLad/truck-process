@@ -27,7 +27,10 @@ radio.onReceivedString(function (receivedString) {
 input.onButtonPressed(Button.B, function () {
     Kitronik_Robotics_Board.allOff()
 })
-let reading = 0
+let Girls_Reservoir_MP = 0
+let Girls_Pump_MP = 0
+let Boys_Reservoir_MP = 0
+let Boys_Pump_MP = 0
 radio.setGroup(1)
 Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 0)
 basic.showIcon(IconNames.Yes)
@@ -37,17 +40,20 @@ radio.setTransmitPower(7)
  */
 basic.forever(function () {
     pins.analogWritePin(AnalogPin.P1, 1023)
-    reading = pins.analogReadPin(AnalogPin.P0)
+    Boys_Pump_MP = pins.analogReadPin(AnalogPin.P0)
+    Boys_Reservoir_MP = pins.analogReadPin(AnalogPin.P2)
+    Girls_Pump_MP = pins.analogReadPin(AnalogPin.P3)
+    Girls_Reservoir_MP = pins.analogReadPin(AnalogPin.P4)
     pins.analogWritePin(AnalogPin.P1, 0)
-    if (input.buttonIsPressed(Button.A)) {
-        basic.showNumber(reading)
-    }
-    if (reading < 500) {
+    if (Boys_Pump_MP > 500) {
         Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 30)
         basic.showIcon(IconNames.SmallSquare)
     } else {
-        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
-        basic.showIcon(IconNames.Square)
+        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 30)
+    }
+    if (Boys_Reservoir_MP > 500) {
+        music.playMelody("C5 C5 C5 C5 C5 C5 C5 C5 ", 120)
+        pins.digitalWritePin(DigitalPin.P16, 1)
     }
     basic.pause(100)
 })
