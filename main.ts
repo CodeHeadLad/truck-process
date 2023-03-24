@@ -28,6 +28,9 @@ input.onButtonPressed(Button.B, function () {
     pins.digitalWritePin(DigitalPin.P16, 1)
     pins.digitalWritePin(DigitalPin.P15, 1)
 })
+/**
+ * https://makecode.microbit.org/projects/soil-moisture/code
+ */
 let Girls_Reservoir_MP = 0
 let Girls_Pump_MP = 0
 let Boys_Reservoir_MP = 0
@@ -36,9 +39,6 @@ radio.setGroup(1)
 Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 0)
 basic.showIcon(IconNames.Yes)
 radio.setTransmitPower(7)
-/**
- * https://makecode.microbit.org/projects/soil-moisture/code
- */
 basic.forever(function () {
     pins.analogWritePin(AnalogPin.P1, 1023)
     Boys_Pump_MP = pins.analogReadPin(AnalogPin.P0)
@@ -46,21 +46,23 @@ basic.forever(function () {
     Girls_Pump_MP = pins.analogReadPin(AnalogPin.P3)
     Girls_Reservoir_MP = pins.analogReadPin(AnalogPin.P4)
     pins.analogWritePin(AnalogPin.P1, 0)
-    if (Boys_Pump_MP < 500) {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 30)
+    if (Boys_Pump_MP > 500) {
+        basic.showNumber(0)
     } else {
-        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
+    	
     }
     if (Boys_Reservoir_MP > 500) {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 30)
+        basic.showNumber(2)
     } else {
-        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
+    	
     }
     if (Girls_Pump_MP > 500) {
+        basic.showNumber(3)
+    } else {
     	
     }
     if (Girls_Reservoir_MP > 500) {
-    	
+        basic.showNumber(4)
     }
     basic.pause(100)
 })
