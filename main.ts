@@ -107,10 +107,10 @@ basic.forever(function () {
         pins.digitalWritePin(DigitalPin.P16, 0)
     }
     if (Girls_Pump_MP > 850) {
-        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 50)
+        Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor2, Kitronik_Robotics_Board.MotorDirection.Forward, 50)
         basic.showNumber(3)
     } else {
-        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
+        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor2)
     }
     if (Girls_Reservoir_MP > 850) {
         pins.digitalWritePin(DigitalPin.P15, 1)
