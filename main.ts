@@ -63,18 +63,16 @@ let Girls_Reservoir_MP = 0
 let Girls_Pump_MP = 0
 let Boys_Reservoir_MP = 0
 let Boys_Pump_MP = 0
+pins.setAudioPinEnabled(false)
 radio.setGroup(1)
 Kitronik_Robotics_Board.servoWrite(Kitronik_Robotics_Board.Servos.Servo1, 0)
 basic.showIcon(IconNames.Yes)
 radio.setTransmitPower(7)
 basic.forever(function () {
-    pins.setAudioPinEnabled(false)
-    pins.analogWritePin(AnalogPin.P1, 1023)
     Boys_Pump_MP = pins.analogReadPin(AnalogPin.P0)
     Boys_Reservoir_MP = pins.analogReadPin(AnalogPin.P2)
     Girls_Pump_MP = pins.analogReadPin(AnalogPin.P3)
     Girls_Reservoir_MP = pins.analogReadPin(AnalogPin.P4)
-    pins.analogWritePin(AnalogPin.P1, 0)
     if (Boys_Pump_MP > 850) {
         Kitronik_Robotics_Board.motorOn(Kitronik_Robotics_Board.Motors.Motor1, Kitronik_Robotics_Board.MotorDirection.Forward, 50)
         basic.showNumber(0)
